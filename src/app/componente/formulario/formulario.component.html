@@ -1,0 +1,26 @@
+
+<label>id:
+  <input [(ngModel)]="id" type="text"/>
+</label>
+
+<label>nome:
+  <input [(ngModel)]="nome" type="text"/>
+</label>
+
+<label>telefone:
+  <input [(ngModel)]="telefone" type="text"/>
+</label>
+
+<label>email:
+  <input [(ngModel)]="email" type="text"/>
+</label>
+
+<button (click)="adcionarContato()">Salvar</button>
+
+<br>
+
+<label>id:
+  <input [(ngModel)]="idRemover" type="text"/>
+</label>
+
+<button (click)="removerContato()">Remover</button>

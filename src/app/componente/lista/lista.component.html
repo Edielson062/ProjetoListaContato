@@ -1,0 +1,14 @@
+<h2>Lista de Contatos</h2>
+
+<div *ngIf="listaContatos.length === 0">
+  Nenhum Contato cadastrado
+</div>
+
+<ul>
+  <li *ngFor="let contato of listaContatos">{{contato.nome}}</li>
+</ul>
+
+<a routerLink="/formulario">Inserir/Remover</a>
+<br>
+<a routerLink="/detalhes">Detalhes</a>
+
