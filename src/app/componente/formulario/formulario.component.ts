@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import {Contato} from '../../models/contato';
 import {ContatoService} from '../../service/contato.service';
 import {FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'

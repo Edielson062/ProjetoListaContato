@@ -5,10 +5,9 @@
 </div>
 
 <ul>
-  <li *ngFor="let contato of listaContatos">{{contato.nome}}</li>
+  <li *ngFor="let contato of listaContatos">{{contato.id}} - {{contato.nome}}</li>
 </ul>
 
-<a routerLink="/formulario">Inserir/Remover</a>
-<br>
+<a routerLink="/formulario">Inserir/Remover</a> |
 <a routerLink="/detalhes">Detalhes</a>
 
