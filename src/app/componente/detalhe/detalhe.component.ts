@@ -18,7 +18,10 @@ import {RouterLink} from '@angular/router';
 export class DetalheComponent {
   listaContatos :Contato [] =[];
 
+  idRemover :number = 0;
+
   constructor(private service :ContatoService) {
-    this.listaContatos = this.service.ListaContato;
+    this.service.listarContatos().subscribe(contatos => this.listaContatos = contatos);
   }
+
 }

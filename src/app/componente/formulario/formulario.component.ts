@@ -26,12 +26,17 @@ email :string = '';
   }
 
   adcionarContato(){
-    this.contatoService.adcionarContato({id:this.id,nome:this.nome,telefone:this.telefone,email:this.email});
+    this.contatoService.adicionarContato({id:this.id,nome:this.nome,telefone:this.telefone,email:this.email});
+    this.router.navigateByUrl('/lista');
+  }
+
+  editarContato(){
+    this.contatoService.editarContato({id:this.id,nome:this.nome,telefone:this.telefone,email:this.email});
     this.router.navigateByUrl('/lista');
   }
 
   removerContato(){
-    this.contatoService.removerContato(this.idRemover);
+    this.contatoService.deletarContato(this.idRemover);
     this.router.navigateByUrl('/lista');
   }
 }

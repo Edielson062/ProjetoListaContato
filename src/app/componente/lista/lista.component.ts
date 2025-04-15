@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Contato} from '../../models/contato';
 import {ContatoService} from '../../service/contato.service';
 import {NgForOf, NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-lista',
@@ -18,7 +18,10 @@ import {RouterLink} from '@angular/router';
 export class ListaComponent {
   listaContatos :Contato [] =[];
 
-  constructor(private service :ContatoService) {
-    this.listaContatos = this.service.ListaContato;
+  id:number = 0;
+
+  constructor(private contatoService :ContatoService) {
+    this.contatoService.listarContatos().subscribe(contatos => this.listaContatos = contatos);
   }
+
 }
