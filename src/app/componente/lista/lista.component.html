@@ -11,6 +11,20 @@
   </li>
 </ul>
 
+<div>
+  <label for="grupo">Selecione um grupo: </label>
+  <select [(ngModel)]="selectedGrupoId" id="grupo" (change)="filtrarPorGrupo()">
+    <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.nome }}</option>
+  </select>
+</div>
+
+<div *ngIf="contatos.length > 0">
+  <ul>
+    <li *ngFor="let contato of contatos">
+      {{ contato.nome }} - {{ contato.telefone }} - {{ contato.email }}
+    </li>
+  </ul>
+</div>
 <a routerLink="/lista-grupo">listaDeGrupos</a> |
 <a routerLink="/formulario">Inserir/Remover</a> |
 <a routerLink="/detalhes">Detalhes</a>

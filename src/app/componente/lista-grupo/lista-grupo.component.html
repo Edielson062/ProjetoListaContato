@@ -1,0 +1,15 @@
+<h2>Lista de Grupos</h2>
+
+<div *ngIf="listaGrupos.length === 0">
+  Nenhum grupo cadastrado
+</div>
+
+<ul>
+  <li *ngFor="let grupo of listaGrupos">
+    {{grupo.id}} - {{grupo.nome}}
+    <button (click)="removerGrupo(grupo.id)">Deletar</button>
+  </li>
+</ul>
+
+<a routerLink="/formulario-grupo">Cadastrar Novo Grupo</a> |
+<a routerLink="/lista">Voltar para contatos</a>

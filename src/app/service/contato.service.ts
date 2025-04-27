@@ -21,6 +21,10 @@ url :string = "http://localhost:8080";
   return this.http.get<Contato>(this.url + '/contato/' + id);
   }
 
+  getContatosPorGrupo(grupoId: number): Observable<Contato[]> {
+    return this.http.get<Contato[]>(this.url + '/contato/grupo/' + grupoId);
+  }
+
   adicionarContato(contato: Contato):Observable<Contato>{
     return this.http.post<Contato>(this.url + '/contato', contato);
   }
