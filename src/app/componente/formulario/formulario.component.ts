@@ -1,42 +1,52 @@
+// src/app/components/formulario/formulario.component.ts
 import { Component } from '@angular/core';
-import {Contato} from '../../models/contato';
-import {ContatoService} from '../../service/contato.service';
-import {FormsModule} from '@angular/forms';
+import { Contato } from '../../models/contato';
+import { Grupo } from '../../models/grupo';
+import { ContatoService } from '../../service/contato.service';
+import { GrupoService } from '../../service/grupo.service';
 import {Router, RouterLink} from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [
-    FormsModule,
-    RouterLink
-  ],
+  imports: [FormsModule, NgForOf, RouterLink],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
-id :number = 0;
-idRemover :number = 0;
-nome :string = '';
-telefone :string = '';
-email :string = '';
+  novoContato: Contato = { id: 0, nome: '', telefone: '', email: '', grupos: [] };
+  listaGrupos: Grupo[] = []; // Lista de grupos carregados do back-end
 
-
-  constructor(private contatoService :ContatoService, private router :Router) {
+  constructor(
+    private contatoService: ContatoService,
+    private grupoService: GrupoService,
+    private router: Router
+  ) {
+    // Carregar todos os grupos
+    this.grupoService.listarGrupos().subscribe(grupos => this.listaGrupos = grupos);
   }
 
-  adcionarContato(){
-    this.contatoService.adicionarContato({id:this.id,nome:this.nome,telefone:this.telefone,email:this.email});
-    this.router.navigateByUrl('/lista');
+  salvar() {
+    if (this.novoContato.id === 0) {
+      this.contatoService.adicionarContato(this.novoContato)
+        .subscribe(() => this.router.navigateByUrl('/lista'));
+    } else {
+      this.contatoService.editarContato(this.novoContato)
+        .subscribe(() => this.router.navigateByUrl('/lista'));
+    }
   }
 
-  editarContato(){
-    this.contatoService.editarContato({id:this.id,nome:this.nome,telefone:this.telefone,email:this.email});
-    this.router.navigateByUrl('/lista');
+  onGrupoChange(event: any, grupo: Grupo) {
+    if (event.target.checked) {
+      this.novoContato.grupos.push(grupo);  // Adiciona o grupo ao contato
+    } else {
+      this.novoContato.grupos = this.novoContato.grupos.filter(g => g.id !== grupo.id);  // Remove o grupo do contato
+    }
   }
 
-  removerContato(){
-    this.contatoService.deletarContato(this.idRemover);
-    this.router.navigateByUrl('/lista');
+  isGrupoSelected(grupo: Grupo): boolean {
+    return this.novoContato.grupos.some(g => g.id === grupo.id);  // Verifica se o grupo já está selecionado
   }
 }

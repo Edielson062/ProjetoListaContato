@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class ContatoService {
 
 ListaContato: Contato[] =[];
-url :string = "localhost: 8080";
+url :string = "http://localhost:8080";
 
   constructor(private  http: HttpClient) { }
 
@@ -29,7 +29,7 @@ url :string = "localhost: 8080";
     return this.http.put<Contato>(this.url + '/contato', contato);
   }
 
-  deletarContato(id:number){
-    this.http.delete<Contato>(this.url + '/contato/' + id);
+  deletarContato(id:number):Observable<void>{
+    return this.http.delete<void>(this.url + '/contato/' + id);
   }
 }

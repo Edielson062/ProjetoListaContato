@@ -1,32 +1,29 @@
-
-<label>id:
-  <input [(ngModel)]="id" type="text"/>
+<!-- src/app/components/formulario/formulario.component.html -->
+<label>Nome:
+  <input [(ngModel)]="novoContato.nome" type="text" placeholder="Digite o nome" />
 </label>
- |
-<label>nome:
-  <input [(ngModel)]="nome" type="text" placeholder="Digite o nome"/>
-</label>
- |
-<label>telefone:
-  <input [(ngModel)]="telefone" type="text" placeholder="Digite o telefone"/>
-</label>
- |
-<label>email:
-  <input [(ngModel)]="email" type="text" placeholder="Digite o e-mail"/>
-</label>
-
-<button (click)="adcionarContato()">Salvar</button>
-
-<button (click)="editarContato()">Editar</button>
 <br>
+<label>Telefone:
+  <input [(ngModel)]="novoContato.telefone" type="text" placeholder="Digite o telefone" />
+</label>
+<br>
+<label>Email:
+  <input [(ngModel)]="novoContato.email" type="text" placeholder="Digite o e-mail" />
+</label>
 <br>
 
-<label>id:
-  <input [(ngModel)]="idRemover" type="text"/>
+<label>Grupos:
+  <div *ngFor="let grupo of listaGrupos">
+    <input
+      type="checkbox"
+      [value]="grupo"
+      (change)="onGrupoChange($event, grupo)"
+      [checked]="isGrupoSelected(grupo)"
+    />
+    {{grupo.nome}}
+  </div>
 </label>
 
-<button (click)="removerContato()">Remover</button>
-
-<br>
-
-<a routerLink="/lista">Retornar a lista</a>
+<button (click)="salvar()">Salvar</button>
+<br><br>
+<a routerLink="/lista">Voltar para lista</a>

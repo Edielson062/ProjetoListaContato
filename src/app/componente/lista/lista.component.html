@@ -5,10 +5,12 @@
 </div>
 
 <ul>
-  <li *ngFor="let contato of listaContatos">{{contato.id}} - {{contato.nome}}</li>
-
+  <li *ngFor="let contato of listaContatos">
+    {{contato.id}} - {{contato.nome}}
+    <button (click)="removerContato(contato.id)">Deletar</button>
+  </li>
 </ul>
 
+<a routerLink="/lista-grupo">listaDeGrupos</a> |
 <a routerLink="/formulario">Inserir/Remover</a> |
 <a routerLink="/detalhes">Detalhes</a>
-
