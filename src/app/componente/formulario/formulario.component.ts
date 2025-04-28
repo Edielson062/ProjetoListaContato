@@ -17,14 +17,14 @@ import {NgForOf} from '@angular/common';
 })
 export class FormularioComponent {
   novoContato: Contato = { id: 0, nome: '', telefone: '', email: '', grupos: [] };
-  listaGrupos: Grupo[] = []; // Lista de grupos carregados do back-end
+  listaGrupos: Grupo[] = [];
 
   constructor(
     private contatoService: ContatoService,
     private grupoService: GrupoService,
     private router: Router
   ) {
-    // Carregar todos os grupos
+
     this.grupoService.listarGrupos().subscribe(grupos => this.listaGrupos = grupos);
   }
 
@@ -40,13 +40,13 @@ export class FormularioComponent {
 
   onGrupoChange(event: any, grupo: Grupo) {
     if (event.target.checked) {
-      this.novoContato.grupos.push(grupo);  // Adiciona o grupo ao contato
+      this.novoContato.grupos.push(grupo);
     } else {
-      this.novoContato.grupos = this.novoContato.grupos.filter(g => g.id !== grupo.id);  // Remove o grupo do contato
+      this.novoContato.grupos = this.novoContato.grupos.filter(g => g.id !== grupo.id);
     }
   }
 
   isGrupoSelected(grupo: Grupo): boolean {
-    return this.novoContato.grupos.some(g => g.id === grupo.id);  // Verifica se o grupo já está selecionado
+    return this.novoContato.grupos.some(g => g.id === grupo.id);
   }
 }
