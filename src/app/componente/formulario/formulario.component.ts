@@ -7,11 +7,16 @@ import { GrupoService } from '../../service/grupo.service';
 import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {NgForOf} from '@angular/common';
+import {FloatLabel} from 'primeng/floatlabel';
+import {Panel} from 'primeng/panel';
+import {IftaLabel} from 'primeng/iftalabel';
+import {Listbox} from 'primeng/listbox';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [FormsModule, NgForOf, RouterLink],
+  imports: [FormsModule, RouterLink, Panel, FloatLabel, Listbox, Button],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
@@ -38,15 +43,5 @@ export class FormularioComponent {
     }
   }
 
-  onGrupoChange(event: any, grupo: Grupo) {
-    if (event.target.checked) {
-      this.novoContato.grupos.push(grupo);
-    } else {
-      this.novoContato.grupos = this.novoContato.grupos.filter(g => g.id !== grupo.id);
-    }
-  }
 
-  isGrupoSelected(grupo: Grupo): boolean {
-    return this.novoContato.grupos.some(g => g.id === grupo.id);
-  }
 }

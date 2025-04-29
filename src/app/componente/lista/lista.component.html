@@ -1,15 +1,36 @@
+<p-menubar [model]="items" />
+
 <h2>Lista de Contatos</h2>
 
 <div *ngIf="listaContatos.length === 0">
   Nenhum Contato cadastrado
 </div>
 
-<ul>
-  <li *ngFor="let contato of listaContatos">
-    {{contato.id}} - {{contato.nome}}
-    <button (click)="removerContato(contato.id)">Deletar</button>
-  </li>
-</ul>
+<p-table [value]="listaContatos" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template #caption>
+    <div >
+      <span class="text-xl font-bold">Lista De Contatos</span>
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>E-mail</th>
+      <th>Grupo</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-contato>
+    <tr>
+      <td>{{ contato.id}}</td>
+      <td>{{contato.nome}}</td>
+      <td>{{ contato.telefone }}</td>
+      <td>{{ contato.email }}</td>
+      <td>{{contato.grupos}}</td>
+    </tr>
+  </ng-template>
+</p-table>
 
 <div>
   <label for="grupo">Selecione um grupo: </label>
@@ -17,14 +38,28 @@
     <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.nome }}</option>
   </select>
 </div>
-
 <div *ngIf="contatos.length > 0">
   <ul>
-    <li *ngFor="let contato of contatos">
-      {{ contato.nome }} - {{ contato.telefone }} - {{ contato.email }}
-    </li>
+      <p-table [value]="contatos" [tableStyle]="{ 'min-width': '30rem' }">
+        <ng-template #caption>
+          <div >
+            <span class="text-xl font-bold">Lista De Contatos</span>
+          </div>
+        </ng-template>
+        <ng-template #header>
+          <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-contato>
+          <tr>
+            <td>{{contato.nome}}</td>
+            <td>{{ contato.telefone }}</td>
+            <td>{{ contato.email }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
   </ul>
 </div>
-<a routerLink="/lista-grupo">listaDeGrupos</a> |
-<a routerLink="/formulario">Inserir/Remover</a> |
-<a routerLink="/detalhes">Detalhes</a>

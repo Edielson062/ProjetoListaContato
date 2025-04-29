@@ -5,7 +5,12 @@ import { NgForOf, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import {Grupo} from '../../models/grupo';
 import {GrupoService} from '../../service/grupo.service';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import {Button} from 'primeng/button';
+import {Select} from 'primeng/select';
+import {Menubar} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-lista',
@@ -13,8 +18,9 @@ import {FormsModule} from '@angular/forms';
   imports: [
     NgForOf,
     NgIf,
-    RouterLink,
-    FormsModule
+    FormsModule,
+    TableModule,
+    Menubar
   ],
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.css'
@@ -23,13 +29,26 @@ export class ListaComponent {
   listaContatos: Contato[] = [];
   grupos: Grupo[] = [];
   contatos: Contato[] = [];
-  selectedGrupoId: number = 0;
+  selectedGrupoId: number | undefined;
 
   constructor(private contatoService: ContatoService, private router: Router, private grupoService: GrupoService) {
     this.contatoService.listarContatos().subscribe(contatos => this.listaContatos = contatos);
   }
+  items: MenuItem[] = [
+    {
+      label: 'Lista grupos',
+      routerLink: '/lista-grupo'
+    },
+    {
+      label: 'Novo Contato',
+      routerLink: '/formulario'
+    },
+    {
+      label: 'Sobre',
+      routerLink: '/detalhes'
+    }
+  ];
 
-  // Método para deletar um contato
   removerContato(id: number): void {
     this.contatoService.deletarContato(id).subscribe(() => {
       this.listaContatos = this.listaContatos.filter(contato => contato.id !== id);
@@ -42,7 +61,6 @@ export class ListaComponent {
     });
   }
 
-  // Método para filtrar contatos por grupo
   filtrarPorGrupo() {
     if (this.selectedGrupoId) {
       this.contatoService.getContatosPorGrupo(this.selectedGrupoId).subscribe(contatos => {

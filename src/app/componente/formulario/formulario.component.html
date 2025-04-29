@@ -1,29 +1,36 @@
-<!-- src/app/components/formulario/formulario.component.html -->
-<label>Nome:
-  <input [(ngModel)]="novoContato.nome" type="text" placeholder="Digite o nome" />
-</label>
-<br>
-<label>Telefone:
-  <input [(ngModel)]="novoContato.telefone" type="text" placeholder="Digite o telefone" />
-</label>
-<br>
-<label>Email:
-  <input [(ngModel)]="novoContato.email" type="text" placeholder="Digite o e-mail" />
-</label>
-<br>
+<p-panel>
+  <p-floatlabel>
+    <input pInputText id="identificador" [(ngModel)]="novoContato.id" />
+    <label for="identificador">Username</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel>
+    <input id="nome" pInputText [(ngModel)]="novoContato.nome" />
+    <label for="nome">Nome</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel>
+    <input id="telefone" pInputText [(ngModel)]="novoContato.telefone" />
+    <label for="telefone">Telefone</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel>
+    <input id="email" pInputText [(ngModel)]="novoContato.email" />
+    <label for="email">E-mail</label>
+  </p-floatlabel>
+  <br>
+  <p-listbox
+    [(ngModel)]="novoContato.grupos"
+    [options]="listaGrupos"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="nome"
+    class="w-full md:w-56">
+  </p-listbox>
+  <br>
+  <p-button label="Salvar" (click)="salvar()"/>
+</p-panel>
 
-<label>Grupos:
-  <div *ngFor="let grupo of listaGrupos">
-    <input
-      type="checkbox"
-      [value]="grupo"
-      (change)="onGrupoChange($event, grupo)"
-      [checked]="isGrupoSelected(grupo)"
-    />
-    {{grupo.nome}}
-  </div>
-</label>
-
-<button (click)="salvar()">Salvar</button>
 <br><br>
+
 <a routerLink="/lista">Voltar para lista</a>
