@@ -1,9 +1,10 @@
-<label>Nome do Grupo:
-  <input [(ngModel)]="novoGrupo.nome" type="text" placeholder="Digite o nome do grupo" />
-</label>
+<p-menubar [model]="items" />
 
-<button (click)="salvar()">Salvar Grupo</button>
-
-<br><br>
-
-<a routerLink="/lista-grupo">Voltar para lista de grupos</a>
+<p-panel>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="nome" [(ngModel)]="novoGrupo.nome" />
+    <label for="nome">Isira o nome do grupo</label>
+  </p-floatlabel>
+  <br>
+  <p-button label="Salvar" (click)="salvar()" class="botao"/>
+</p-panel>

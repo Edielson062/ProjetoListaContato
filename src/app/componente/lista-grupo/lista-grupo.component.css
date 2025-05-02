@@ -1,0 +1,13 @@
+.aviso-vazio {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.painel-centralizado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}

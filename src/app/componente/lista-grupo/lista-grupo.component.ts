@@ -2,15 +2,19 @@ import { Component } from '@angular/core';
 import { Grupo } from '../../models/grupo';
 import { GrupoService } from '../../service/grupo.service';
 import { NgForOf, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {MenuItem} from 'primeng/api';
+import {Menubar} from 'primeng/menubar';
+import {TableModule} from 'primeng/table';
+import {Panel} from 'primeng/panel';
 
 @Component({
   selector: 'app-lista-grupo',
   standalone: true,
   imports: [
-    NgForOf,
     NgIf,
-    RouterLink
+    Menubar,
+    TableModule,
+    Panel
   ],
   templateUrl: './lista-grupo.component.html',
   styleUrl: './lista-grupo.component.css'
@@ -27,5 +31,36 @@ export class ListaGrupoComponent {
       this.listaGrupos = this.listaGrupos.filter(grupo => grupo.id !== id);
     });
   }
+
+  items: MenuItem[] = [
+    {
+      label:'Lista de Contatos',
+      routerLink:'/lista'
+    },
+    {
+      label: 'Lista de Contato Detalhada',
+      routerLink: '/detalhes'
+    },
+    {
+      label: 'Lista de Grupos',
+      routerLink: '/lista-grupo'
+    },
+    {
+      label: 'Lista de Agendamentos',
+      routerLink:'/lista-agenda'
+    },
+    {
+      label: 'Novo Contato',
+      routerLink: '/formulario'
+    },
+    {
+      label: 'Novo Grupo',
+      routerLink: '/formulario-grupo'
+    },
+    {
+      label:'Novo Agendamento',
+      routerLink:'/formulario-agenda'
+    }
+  ];
 
 }

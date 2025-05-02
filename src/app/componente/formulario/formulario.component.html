@@ -1,22 +1,20 @@
-<p-panel>
-  <p-floatlabel>
-    <input pInputText id="identificador" [(ngModel)]="novoContato.id" />
-    <label for="identificador">Username</label>
-  </p-floatlabel>
-  <br>
-  <p-floatlabel>
+<p-menubar [model]="items" />
+
+<p-panel >
+  <h2>Inserir</h2>
+  <p-floatlabel class="painel-centralizado">
     <input id="nome" pInputText [(ngModel)]="novoContato.nome" />
-    <label for="nome">Nome</label>
+    <label for="nome">Insira o Nome</label>
   </p-floatlabel>
   <br>
-  <p-floatlabel>
+  <p-floatlabel class="painel-centralizado">
     <input id="telefone" pInputText [(ngModel)]="novoContato.telefone" />
-    <label for="telefone">Telefone</label>
+    <label for="telefone">Insira o Telefone</label>
   </p-floatlabel>
   <br>
-  <p-floatlabel>
+  <p-floatlabel class="painel-centralizado">
     <input id="email" pInputText [(ngModel)]="novoContato.email" />
-    <label for="email">E-mail</label>
+    <label for="email">Insira o E-mail</label>
   </p-floatlabel>
   <br>
   <p-listbox
@@ -25,12 +23,63 @@
     [multiple]="true"
     [checkbox]="true"
     optionLabel="nome"
-    class="w-full md:w-56">
+    class="painel-centralizado">
   </p-listbox>
   <br>
-  <p-button label="Salvar" (click)="salvar()"/>
+  <p-button label="Salvar" (click)="salvar()" class="botao"/>
 </p-panel>
 
-<br><br>
 
-<a routerLink="/lista">Voltar para lista</a>
+<p-panel>
+  <h2>Editar</h2>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="identificador" [(ngModel)]="novoContato.id" />
+    <label for="identificador">Identificador a ser editado</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input id="nome1" pInputText [(ngModel)]="novoContato.nome" />
+    <label for="nome">Editar o Nome</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input id="telefone2" pInputText [(ngModel)]="novoContato.telefone" />
+    <label for="telefone">Editar o Telefone</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input id="email3" pInputText [(ngModel)]="novoContato.email" />
+    <label for="email">Editar o E-mail</label>
+  </p-floatlabel>
+  <br>
+  <p-listbox
+    [(ngModel)]="novoContato.grupos"
+    [options]="listaGrupos"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="nome"
+    class="painel-centralizado">
+  </p-listbox>
+  <br>
+  <p-button label="Editar" (click)="salvar()" class="botao"/>
+</p-panel>
+
+<p-panel>
+  <h2>Deletar</h2>
+  <p-floatlabel class="painel-centralizado">
+    <h4>Digite o indentificador do contato a ser deletado</h4>
+    <input pInputText id="identificador2" [(ngModel)]="novoContato.id" />
+    <label for="identificador2"></label>
+  </p-floatlabel>
+  <br>
+  <p-listbox
+    [(ngModel)]="novoContato.grupos"
+    [options]="listaGrupos"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="nome"
+    class="painel-centralizado">
+  </p-listbox>
+  <br>
+  <p-button label="Deletar" (click)="salvar()" class="botao"/>
+</p-panel>

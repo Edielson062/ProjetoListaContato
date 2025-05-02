@@ -1,9 +1,9 @@
-import { Grupo } from './grupo';  // Importando o Grupo
+import { Grupo } from './grupo';
 
 export interface Contato {
   id: number;
   nome: string;
   telefone: string;
   email: string;
-  grupos: Grupo[];  // Agora o contato possui um array de grupos
+  grupos: Grupo[];
 }

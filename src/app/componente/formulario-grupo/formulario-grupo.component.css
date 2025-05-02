@@ -1,0 +1,12 @@
+.painel-centralizado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.botao{
+  display: flex;
+  align-items: center;
+}

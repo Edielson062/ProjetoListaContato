@@ -1,11 +1,36 @@
-<h2>Lista de Contatos detalhada</h2>
-
-<div *ngIf="listaContatos.length === 0">
+<p-menubar [model]="items" />
+<p-panel>
+<div *ngIf="listaContatos.length === 0" class="aviso-vazio">
   Nenhum Contato cadastrado
 </div>
 
-<ul>
-  <li *ngFor="let contato of listaContatos">{{contato.id}} - {{contato.nome}} - {{contato.telefone}} - {{contato.email}} - {{contato.grupos}}</li>
-</ul>
-
-<a routerLink="/lista">Retornar a lista</a>
+<p-table *ngIf="listaContatos.length > 0" [value]="listaContatos" [tableStyle]="{ 'min-width': '60rem'}" class="painel-centralizado">
+  <ng-template #caption>
+    <div >
+      <span class="text-xl font-bold">Lista De Contatos Detalhada</span>
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Email</th>
+      <th>Grupos</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-contato>
+    <tr>
+      <td>{{ contato.id}}</td>
+      <td>{{contato.nome}}</td>
+      <th>{{contato.telefone}}</th>
+      <th>{{contato.email}}</th>
+      <td>
+        <ng-container *ngFor="let grupo of contato.grupos; let last = last">
+          {{ grupo.nome }}<span *ngIf="!last">, </span>
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+</p-panel>
