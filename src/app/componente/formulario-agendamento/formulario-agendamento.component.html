@@ -1,0 +1,34 @@
+<p-menubar [model]="items" />
+
+<p-panel>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="titulo" [(ngModel)]="novoAgendamento.titulo" />
+    <label for="titulo">Isira o Titulo</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="descricao" [(ngModel)]="novoAgendamento.titulo" />
+    <label for="descricao">Isira a Descrição</label>
+  </p-floatlabel>
+  <br>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="data-hora" [(ngModel)]="novoAgendamento.titulo" />
+    <label for="data-hora">Isira Data e Hora</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="local" [(ngModel)]="novoAgendamento.titulo" />
+    <label for="local">Isira o Local</label>
+  </p-floatlabel>
+  <br>
+  <p-listbox
+    [(ngModel)]="novoAgendamento.contatos"
+    [options]="listaContato"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="nome"
+    class="painel-centralizado">
+  </p-listbox>
+  <p-button label="Salvar" (click)="salvar()" class="botao"/>
+</p-panel>
