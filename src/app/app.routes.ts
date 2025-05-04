@@ -13,7 +13,7 @@ export const routes: Routes = [
   {path:'detalhes', component: DetalheComponent},
   { path: 'formulario-grupo', component: FormularioGrupoComponent },
   { path: 'lista-grupo', component: ListaGrupoComponent },
-  {path: 'lsita-agenda', component:ListaAgendamentoComponent },
+  {path: 'lista-agenda', component:ListaAgendamentoComponent },
   {path: 'formulario-agenda', component:FormularioAgendamentoComponent},
   {path:'', redirectTo:'/lista', pathMatch:'full'}
 ];

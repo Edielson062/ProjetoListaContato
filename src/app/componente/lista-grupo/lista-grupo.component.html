@@ -20,6 +20,9 @@
     <tr>
       <td>{{ grupo.id}}</td>
       <td>{{grupo.nome}}</td>
+      <td>
+        <p-button icon="pi pi-trash" (click)="removerGrupo(grupo.id)" severity="secondary" rounded />
+      </td>
     </tr>
   </ng-template>
 </p-table>

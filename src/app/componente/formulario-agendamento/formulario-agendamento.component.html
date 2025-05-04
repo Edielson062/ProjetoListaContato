@@ -1,34 +1,93 @@
 <p-menubar [model]="items" />
 
 <p-panel>
+  <h2>Inserir</h2>
   <p-floatlabel class="painel-centralizado">
-    <input pInputText id="titulo" [(ngModel)]="novoAgendamento.titulo" />
+    <input pInputText id="titulo" [(ngModel)]="agendamentoInserir.titulo" />
     <label for="titulo">Isira o Titulo</label>
   </p-floatlabel>
   <br>
   <p-floatlabel class="painel-centralizado">
-    <input pInputText id="descricao" [(ngModel)]="novoAgendamento.titulo" />
+    <input pInputText id="descricao" [(ngModel)]="agendamentoInserir.descricao" />
     <label for="descricao">Isira a Descrição</label>
   </p-floatlabel>
   <br>
-  <br>
   <p-floatlabel class="painel-centralizado">
-    <input pInputText id="data-hora" [(ngModel)]="novoAgendamento.titulo" />
+    <input pInputText id="data-hora" [(ngModel)]="agendamentoInserir.dataHora" />
     <label for="data-hora">Isira Data e Hora</label>
   </p-floatlabel>
   <br>
   <p-floatlabel class="painel-centralizado">
-    <input pInputText id="local" [(ngModel)]="novoAgendamento.titulo" />
+    <input pInputText id="local" [(ngModel)]="agendamentoInserir.local" />
     <label for="local">Isira o Local</label>
   </p-floatlabel>
   <br>
   <p-listbox
-    [(ngModel)]="novoAgendamento.contatos"
+    [(ngModel)]="agendamentoInserir.contatos"
     [options]="listaContato"
     [multiple]="true"
     [checkbox]="true"
     optionLabel="nome"
     class="painel-centralizado">
   </p-listbox>
-  <p-button label="Salvar" (click)="salvar()" class="botao"/>
+  <br>
+  <p-listbox
+    [(ngModel)]="agendamentoInserir.status"
+    [options]="listaStatus"
+    [multiple]="true"
+    [checkbox]="true"
+    class="painel-centralizado">
+  </p-listbox>
+  <br>
+  <p-button label="Salvar" (click)="salvar()" />
+</p-panel>
+
+<p-panel>
+  <h2>Editar</h2>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <p-floatlabel style="flex: 1;">
+      <input pInputText id="identificador" [(ngModel)]="agendamentoEditar.id" />
+      <label for="identificador">Identificador a ser editado</label>
+    </p-floatlabel>
+    <p-button icon="pi pi-search" label="Carregar" (click)="carregarAgendamentoPorId()" />
+  </div>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="titulo1" [(ngModel)]="agendamentoEditar.titulo" />
+    <label for="titulo1">Isira o Titulo</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="descricao1" [(ngModel)]="agendamentoEditar.descricao" />
+    <label for="descricao1">Isira a Descrição</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="data-hora1" [(ngModel)]="agendamentoEditar.dataHora" />
+    <label for="data-hora1">Isira Data e Hora</label>
+  </p-floatlabel>
+  <br>
+  <p-floatlabel class="painel-centralizado">
+    <input pInputText id="local1" [(ngModel)]="agendamentoEditar.local" />
+    <label for="local1">Isira o Local</label>
+  </p-floatlabel>
+  <br>
+  <p-listbox
+    [(ngModel)]="agendamentoEditar.contatos"
+    [options]="listaContato"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="nome"
+    class="painel-centralizado">
+  </p-listbox>
+  <br>
+  <p-listbox
+    [(ngModel)]="agendamentoEditar.status"
+    [options]="listaStatus"
+    [multiple]="true"
+    [checkbox]="true"
+    class="painel-centralizado">
+  </p-listbox>
+  <br>
+  <p-button label="Editar" (click)="editar()" />
 </p-panel>

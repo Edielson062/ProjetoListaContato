@@ -13,7 +13,12 @@
     <ng-template #header>
       <tr>
         <th>Identifacador</th>
-        <th>Grupo</th>
+        <th>Titulo</th>
+        <th>Descrição</th>
+        <th>Data e Hora</th>
+        <th>Local</th>
+        <th>Participantes</th>
+        <th>Status</th>
       </tr>
     </ng-template>
     <ng-template #body let-agenda>
@@ -25,8 +30,12 @@
         <td>{{agenda.local}}</td>
         <td>
           <ng-container *ngFor="let contato of agenda.contatos; let last = last">
-            {{ contato.nome }} , {{contato.telefone}}, {{contato.email}}<span *ngIf="!last"> - </span>
+            {{ contato.nome }}<span *ngIf="!last"> - </span>
           </ng-container>
+        </td>
+        <th>{{agenda.status}}</th>
+        <td>
+          <p-button icon="pi pi-trash" (click)="remover(agenda.id)" severity="secondary" rounded />
         </td>
       </tr>
     </ng-template>

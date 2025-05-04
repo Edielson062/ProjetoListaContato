@@ -1,10 +1,28 @@
 <p-menubar [model]="items" />
 
 <p-panel>
-  <p-floatlabel class="painel-centralizado">
-    <input pInputText id="nome" [(ngModel)]="novoGrupo.nome" />
+  <h2>Inserir</h2>
+  <p-floatlabel >
+    <input pInputText id="nome" [(ngModel)]="grupoInserir.nome" />
     <label for="nome">Isira o nome do grupo</label>
   </p-floatlabel>
   <br>
   <p-button label="Salvar" (click)="salvar()" class="botao"/>
+</p-panel>
+<p-panel>
+  <h2>Editar</h2>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <p-floatlabel style="flex: 1;">
+      <input pInputText id="identificador" [(ngModel)]="grupoEditar.id" />
+      <label for="identificador">Identificador a ser editado</label>
+    </p-floatlabel>
+    <p-button icon="pi pi-search" label="Carregar" (click)="carregarGrupoPorId()" />
+  </div>
+  <br>
+  <p-floatlabel >
+    <input pInputText id="nome2" [(ngModel)]="grupoEditar.nome" />
+    <label for="nome">Edite o nome do grupo</label>
+  </p-floatlabel>
+  <br>
+  <p-button label="Editar" (click)="Editar()" class="botao"/>
 </p-panel>

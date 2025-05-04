@@ -6,6 +6,7 @@ import {MenuItem} from 'primeng/api';
 import {Menubar} from 'primeng/menubar';
 import {TableModule} from 'primeng/table';
 import {Panel} from 'primeng/panel';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-lista-grupo',
@@ -14,7 +15,8 @@ import {Panel} from 'primeng/panel';
     NgIf,
     Menubar,
     TableModule,
-    Panel
+    Panel,
+    Button
   ],
   templateUrl: './lista-grupo.component.html',
   styleUrl: './lista-grupo.component.css'

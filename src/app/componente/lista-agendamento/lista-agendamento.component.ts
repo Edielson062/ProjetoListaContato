@@ -7,6 +7,7 @@ import {Menubar} from 'primeng/menubar';
 import {NgForOf, NgIf} from '@angular/common';
 import {Panel} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-lista-agendamento',
@@ -15,7 +16,8 @@ import {TableModule} from 'primeng/table';
     NgIf,
     Panel,
     TableModule,
-    NgForOf
+    NgForOf,
+    Button
   ],
   templateUrl: './lista-agendamento.component.html',
   standalone: true,
@@ -27,6 +29,12 @@ export class ListaAgendamentoComponent {
 
   constructor(private service:AgendaService) {
     this.service.listarAgenda().subscribe(agendas => this.listaAgendamentos = agendas);
+  }
+
+  remover(id:number){
+    this.service.deletarAgenda(id).subscribe(() => {
+      this.listaAgendamentos = this.listaAgendamentos.filter(agenda => agenda.id !== id);
+    });
   }
 
   items: MenuItem[] = [

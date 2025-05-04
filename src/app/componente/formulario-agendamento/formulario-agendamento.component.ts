@@ -12,9 +12,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Listbox} from 'primeng/listbox';
 import {ContatoService} from '../../service/contato.service';
 import {Contato} from '../../models/contato';
+import {MessageService} from 'primeng/api';
+import {Toast} from 'primeng/toast';
 
 @Component({
   selector: 'app-formulario-agendamento',
+  providers: [MessageService],
   imports: [
     Button,
     FloatLabel,
@@ -23,23 +26,61 @@ import {Contato} from '../../models/contato';
     Panel,
     ReactiveFormsModule,
     FormsModule,
-    Listbox
+    Listbox,
+    Toast
   ],
   templateUrl: './formulario-agendamento.component.html',
   standalone: true,
   styleUrl: './formulario-agendamento.component.css'
 })
 export class FormularioAgendamentoComponent {
-  novoAgendamento: Agenda = {id:0,titulo:'',descricao:'',dataHora:'',local:'',contatos:[]}
+  agendamentoInserir: Agenda = {titulo:'',descricao:'',dataHora:'',local:'',contatos:[],status:''}
+  agendamentoEditar: Agenda = {id:0,titulo:'',descricao:'',dataHora:'',local:'',contatos:[],status:''}
   listaContato:Contato[] = [];
+  listaStatus:string[] =['PENDENTE','REALIZADO','CANCELADO'];
 
-  constructor(private service: AgendaService, private router:Router, private contatoService:ContatoService) {
+  constructor(private service: AgendaService, private router:Router, private contatoService:ContatoService, private messageService: MessageService) {
     this.contatoService.listarContatos().subscribe(contatos => this.listaContato = contatos);
   }
 
-  salvar(){
-    this.service.adicionarAgenda(this.novoAgendamento)
-      .subscribe(() => this.router.navigateByUrl('/lista-grupo'));
+  salvar() {
+    this.service.adicionarAgenda(this.agendamentoInserir).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/lista-agenda');
+      },
+      error: (erro) => {
+        const msg = erro.error?.message || 'Erro ao salvar agendamento.';
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: msg
+        });
+      }
+    });
+  }
+  editar(){
+    this.service.editarAgenda(this.agendamentoEditar).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/lista-agenda');
+      },
+      error: (erro) => {
+        const msg = erro.error?.message || 'Erro ao salvar agendamento.';
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: msg
+        });
+      }
+    });
+  }
+
+  carregarAgendamentoPorId(): void {
+    if (this.agendamentoEditar.id) {
+      this.service.listarAgendaPorId(this.agendamentoEditar.id).subscribe({
+        next: (contato) => this.agendamentoEditar = contato,
+        error: (err) => console.error('Contato não encontrado', err)
+      });
+    }
   }
   items: MenuItem[] = [
     {

@@ -11,16 +11,18 @@ import {Listbox} from 'primeng/listbox';
 import {Button} from 'primeng/button';
 import {MenuItem} from 'primeng/api';
 import {Menubar} from 'primeng/menubar';
+import {InputText} from 'primeng/inputtext';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [FormsModule, Panel, FloatLabel, Listbox, Button, Menubar],
+  imports: [FormsModule, Panel, FloatLabel, Listbox, Button, Menubar, InputText],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
-  novoContato: Contato = { id: 0, nome: '', telefone: '', email: '', grupos: [] };
+  contatoInserir: Contato = { id: 0, nome: '', telefone: '', email: '', grupos: [] };
+  contatoEditar: Contato = { id: 0, nome: '', telefone: '', email: '', grupos: [] };
   listaGrupos: Grupo[] = [];
 
   constructor(
@@ -32,15 +34,26 @@ export class FormularioComponent {
     this.grupoService.listarGrupos().subscribe(grupos => this.listaGrupos = grupos);
   }
 
-  salvar() {
-    if (this.novoContato.id === 0) {
-      this.contatoService.adicionarContato(this.novoContato)
-        .subscribe(() => this.router.navigateByUrl('/lista'));
-    } else {
-      this.contatoService.editarContato(this.novoContato)
-        .subscribe(() => this.router.navigateByUrl('/lista'));
+  salvarInserir() {
+    this.contatoService.adicionarContato(this.contatoInserir)
+      .subscribe(() => this.router.navigateByUrl('/lista'));
+  }
+
+  salvarEditar() {
+    this.contatoService.editarContato(this.contatoEditar)
+      .subscribe(() => this.router.navigateByUrl('/lista'));
+  }
+
+  carregarContatoPorId(): void {
+    if (this.contatoEditar.id) {
+      this.contatoService.listarContatosPorId(this.contatoEditar.id).subscribe({
+        next: (contato) => this.contatoEditar = contato,
+        error: (err) => console.error('Contato não encontrado', err)
+      });
     }
   }
+
+
 
   items: MenuItem[] = [
     {

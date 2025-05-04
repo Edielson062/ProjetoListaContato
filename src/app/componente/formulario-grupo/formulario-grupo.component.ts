@@ -25,20 +25,27 @@ import {InputText} from 'primeng/inputtext';
   styleUrl: './formulario-grupo.component.css'
 })
 export class FormularioGrupoComponent {
-  novoGrupo: Grupo = { id: 0, nome: '' };
+  grupoInserir: Grupo = { id: 0, nome: '' };
+  grupoEditar: Grupo = { id: 0, nome: '' };
 
   constructor(private grupoService: GrupoService, private router: Router) {}
 
   salvar() {
-    if (this.novoGrupo.id === 0) {
-      this.grupoService.adicionarGrupo(this.novoGrupo)
+      this.grupoService.adicionarGrupo(this.grupoInserir)
         .subscribe(() => this.router.navigateByUrl('/lista-grupo'));
-    } else {
-      this.grupoService.editarGrupo(this.novoGrupo)
-        .subscribe(() => this.router.navigateByUrl('/lista-grupo'));
+  }
+  Editar(){
+    this.grupoService.editarGrupo(this.grupoEditar)
+      .subscribe(() => this.router.navigateByUrl('/lista-grupo'));
+  }
+  carregarGrupoPorId(): void {
+    if (this.grupoEditar.id) {
+      this.grupoService.listarGrupoPorId(this.grupoEditar.id).subscribe({
+        next: (grupo) => this.grupoEditar = grupo,
+        error: (err) => console.error('Grupo não encontrado', err)
+      });
     }
   }
-
   items: MenuItem[] = [
     {
       label:'Lista de Contatos',
